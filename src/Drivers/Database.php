@@ -75,7 +75,7 @@ class Database extends Driver implements DriverAble {
      * @param null $group
      * @return bool|void
      */
-    public function inert($key, $value, $group = null) {
+    public function insert($key, $value, $group = null) {
         $this->repository->updateOrCreate($key, [
             'value' => $value,
             'group' => $group

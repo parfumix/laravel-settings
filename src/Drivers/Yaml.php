@@ -50,7 +50,7 @@ class Yaml extends Driver implements DriverAble {
      *
      * @return void
      */
-    public function inert($key, $value) {
+    public function insert($key, $value) {
         // TODO: Implement inert() method.
     }
 
