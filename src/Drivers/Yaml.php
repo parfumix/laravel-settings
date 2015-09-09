@@ -4,16 +4,40 @@ namespace Laravel\Settings\Drivers;
 
 use Laravel\Settings\Driver;
 use Laravel\Settings\DriverAble;
+use Flysap\Support;
 
 class Yaml extends Driver implements DriverAble {
 
     /**
-     * Set sdk .
+     * @var array
+     */
+    protected $settings = [];
+
+    /**
+     * Set settings .
      *
      * @return mixed
      */
     public function init() {
-        // TODO: Implement init() method.
+        $attributes = $this->getAttributes();
+        $fullPath = storage_path(
+            $attributes['path']
+        );
+
+        if( Support\is_path_exists(
+            $fullPath
+        ) )
+            $this->settings = Support\get_file_contents(
+                $fullPath, 'yaml'
+            );
+        else
+            Support\dump_file($fullPath, json_encode([]));
+
+        register_shutdown_function(function() use($fullPath) {
+            Support\dump_file(
+                $fullPath, json_encode($this->settings)
+            );
+        });
     }
 
     /**
@@ -22,7 +46,7 @@ class Yaml extends Driver implements DriverAble {
      * @return array
      */
     public function all() {
-        // TODO: Implement all() method.
+        return $this->settings;
     }
 
     /**
@@ -33,34 +57,44 @@ class Yaml extends Driver implements DriverAble {
      * @return mixed
      */
     public function get($key, $default = null) {
-        // TODO: Implement get() method.
+        return isset($this->settings[$key]) ? $this->settings[$key] : $default;
     }
 
     /**
      * update option value.
      *
-     * @return void
+     * @param $key
+     * @param $value
+     * @return $this|void
      */
     public function update($key, $value) {
-        // TODO: Implement update() method.
+        $this->settings[$key] = $value;
+
+        return $this;
     }
 
     /**
      * Insert a new option and set value.
      *
-     * @return void
+     * @param $key
+     * @param $value
+     * @return $this|Json|void
      */
     public function insert($key, $value) {
-        // TODO: Implement inert() method.
+        return $this->update($key, $value);
     }
 
     /**
      * delete option.
      *
-     * @return void
+     * @param $key
+     * @return $this|void
      */
     public function delete($key) {
-        // TODO: Implement delete() method.
+        if( isset($this->settings[$key]) )
+            unset($this->settings[$key]);
+
+        return $this;
     }
 
     /**
@@ -69,7 +103,9 @@ class Yaml extends Driver implements DriverAble {
      * @return array
      */
     public function clear() {
-        // TODO: Implement clear() method.
+        $this->settings = [];
+
+        return $this;
     }
 
 }
