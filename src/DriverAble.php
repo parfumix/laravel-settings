@@ -33,7 +33,7 @@ interface DriverAble {
      *
      * @return void
      */
-    public function inert($key, $value);
+    public function insert($key, $value);
 
     /**
      * delete option.
