@@ -16,6 +16,8 @@ class CreateSettingsTable extends Migration {
             $table->string('group');
             $table->string('key');
             $table->string('value');
+
+            $table->unique(['key']);
         });
     }
 
