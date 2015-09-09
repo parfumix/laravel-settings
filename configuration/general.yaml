@@ -5,3 +5,7 @@ default: database
 drivers:
   database:
     class: Laravel\Settings\Drivers\Database
+  json:
+    class: Laravel\Settings\Drivers\Json
+  yaml:
+    class: Laravel\Settings\Drivers\Yaml
