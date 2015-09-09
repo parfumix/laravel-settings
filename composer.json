@@ -11,7 +11,14 @@
       "role": "Developer"
     }
   ],
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/flysap/support"
+    }
+  ],
   "require": {
+    "flysap/support": "dev-master",
     "php": ">=5.4.0",
     "laravel/framework": "~5.0"
   },
