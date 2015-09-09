@@ -14,6 +14,10 @@ class SettingsServiceProvider extends ServiceProvider {
         $this->publishes([
             __DIR__.'/../assets/configuration' => config_path('yaml/settings'),
         ]);
+
+        $this->publishes([
+            __DIR__.'/DriverAssets/Database/migrations' => database_path('migrations'),
+        ]);
     }
 
     /**
