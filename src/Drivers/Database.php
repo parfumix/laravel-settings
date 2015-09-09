@@ -4,8 +4,15 @@ namespace Laravel\Settings\Drivers;
 
 use Laravel\Settings\Driver;
 use Laravel\Settings\DriverAble;
+use Laravel\Settings\DriverAssets\Database\Setting;
+use Laravel\Settings\DriverAssets\Database\SettingsRepository;
 
 class Database extends Driver implements DriverAble {
+
+    /**
+     * @var
+     */
+    protected $repository;
 
     /**
      * Set sdk .
@@ -13,7 +20,9 @@ class Database extends Driver implements DriverAble {
      * @return mixed
      */
     public function init() {
-        // TODO: Implement initSource() method.
+        $this->repository = new SettingsRepository(
+            new Setting
+        );
     }
 
     /**
@@ -22,7 +31,8 @@ class Database extends Driver implements DriverAble {
      * @return array
      */
     public function all() {
-        // TODO: Implement all() method.
+        return $this->repository
+            ->all();
     }
 
     /**
@@ -33,25 +43,44 @@ class Database extends Driver implements DriverAble {
      * @return mixed
      */
     public function get($key, $default = null) {
-        // TODO: Implement get() method.
+        $settings = $this->repository
+            ->getByKey($key);
+
+        return isset($settings) ? $settings->value : $default;
     }
 
     /**
      * update option value.
      *
-     * @return void
+     * @param $key
+     * @param $value
+     * @param null $group
+     * @return bool|void
      */
-    public function update($key, $value) {
-        // TODO: Implement update() method.
+    public function update($key, $value, $group = null) {
+        $this->repository->updateOrCreate($key, [
+            'value' => $value,
+            'group' => $group
+        ]);
+
+        return true;
     }
 
     /**
      * Insert a new option and set value.
      *
-     * @return void
+     * @param $key
+     * @param $value
+     * @param null $group
+     * @return bool|void
      */
-    public function inert($key, $value) {
-        // TODO: Implement inert() method.
+    public function inert($key, $value, $group = null) {
+        $this->repository->updateOrCreate($key, [
+            'value' => $value,
+              'group' => $group
+        ]);
+
+        return true;
     }
 
     /**
@@ -60,7 +89,10 @@ class Database extends Driver implements DriverAble {
      * @return void
      */
     public function delete($key) {
-        // TODO: Implement delete() method.
+        $this->repository
+            ->deleteByKey($key);
+
+        return true;
     }
 
     /**
@@ -69,7 +101,10 @@ class Database extends Driver implements DriverAble {
      * @return array
      */
     public function clear() {
-        // TODO: Implement clear() method.
+        $this->repository
+            ->deleteAll();
+
+        return true;
     }
 
 }
