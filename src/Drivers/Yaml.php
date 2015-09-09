@@ -5,6 +5,7 @@ namespace Laravel\Settings\Drivers;
 use Laravel\Settings\Driver;
 use Laravel\Settings\DriverAble;
 use Flysap\Support;
+use Symfony\Component\Yaml\Yaml as YamlParser;
 
 class Yaml extends Driver implements DriverAble {
 
@@ -35,7 +36,7 @@ class Yaml extends Driver implements DriverAble {
 
         register_shutdown_function(function() use($fullPath) {
             Support\dump_file(
-                $fullPath, json_encode($this->settings)
+                $fullPath, YamlParser::dump($this->settings)
             );
         });
     }
