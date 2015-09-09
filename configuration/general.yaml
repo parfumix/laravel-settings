@@ -2,10 +2,13 @@
 default: database
 
 # here you can declare you drivers .
+# for file driver path is relative from storage path .
 drivers:
   database:
     class: Laravel\Settings\Drivers\Database
   json:
     class: Laravel\Settings\Drivers\Json
+    path: settings.json
   yaml:
     class: Laravel\Settings\Drivers\Yaml
+    path: setings.yaml
