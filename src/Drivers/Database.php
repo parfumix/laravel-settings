@@ -32,7 +32,8 @@ class Database extends Driver implements DriverAble {
      */
     public function all() {
         return $this->repository
-            ->all();
+            ->all()
+            ->toArray();
     }
 
     /**

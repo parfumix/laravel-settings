@@ -16,7 +16,7 @@ class SettingsRepository {
      * @return mixed
      */
     public function all() {
-        return $this->model->lists('key', 'value');
+        return $this->model->lists('value', 'key');
     }
 
     /**
