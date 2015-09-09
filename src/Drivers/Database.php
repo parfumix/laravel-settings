@@ -8,6 +8,15 @@ use Laravel\Settings\DriverAble;
 class Database extends Driver implements DriverAble {
 
     /**
+     * Set sdk .
+     *
+     * @return mixed
+     */
+    public function init() {
+        // TODO: Implement initSource() method.
+    }
+
+    /**
      * Retrieve all options/values.
      *
      * @return array
@@ -62,4 +71,5 @@ class Database extends Driver implements DriverAble {
     public function clear() {
         // TODO: Implement clear() method.
     }
+
 }
