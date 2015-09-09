@@ -77,7 +77,7 @@ class Database extends Driver implements DriverAble {
     public function inert($key, $value, $group = null) {
         $this->repository->updateOrCreate($key, [
             'value' => $value,
-              'group' => $group
+            'group' => $group
         ]);
 
         return true;
@@ -86,7 +86,8 @@ class Database extends Driver implements DriverAble {
     /**
      * delete option.
      *
-     * @return void
+     * @param $key
+     * @return bool|void
      */
     public function delete($key) {
         $this->repository
