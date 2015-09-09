@@ -12,7 +12,7 @@ class SettingsServiceProvider extends ServiceProvider {
      */
     public function boot() {
         $this->publishes([
-            __DIR__.'/../assets/configuration' => config_path('yaml/settings'),
+            __DIR__.'/../configuration' => config_path('yaml/settings'),
         ]);
 
         $this->publishes([
