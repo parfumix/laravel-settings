@@ -1,0 +1,7 @@
+# here will be declared default driver .
+default: database
+
+# here you can declare you drivers .
+drivers:
+  database:
+    class: Laravel\Settings\Drivers\Database
