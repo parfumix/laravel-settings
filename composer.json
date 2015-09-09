@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Laravel\\Settings": "src/"
+      "Laravel\\Settings\\": "src/"
     },
     "autoload": ["helpers.php"]
   },
