@@ -9,4 +9,6 @@ class Setting extends Model {
     public $table = 'settings';
 
     public $fillable = ['group', 'key', 'value'];
+
+    public $timestamps = false;
 }

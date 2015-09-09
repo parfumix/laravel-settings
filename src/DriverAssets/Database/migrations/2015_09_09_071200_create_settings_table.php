@@ -13,7 +13,7 @@ class CreateSettingsTable extends Migration {
     public function up() {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('group');
+            $table->string('group')->nullable()->default(null);
             $table->string('key');
             $table->string('value');
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Settings;
+namespace Laravel\Settings\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -2,13 +2,11 @@
 
 namespace Laravel\Settings\DriverAssets\Database;
 
-use Laravel\Settings\Settings;
-
 class SettingsRepository {
 
     protected $model;
 
-    public function __construct(Settings $model) {
+    public function __construct(Setting $model) {
         $this->model = $model;
     }
 
@@ -80,7 +78,9 @@ class SettingsRepository {
      * @return $this
      */
     public function updateOrCreate($key, array $data) {
-        $this->model->updateOrCreate($key, $data);
+        $this->model->updateOrCreate([
+            'key' => $key
+        ], $data);
 
         return $this;
     }
