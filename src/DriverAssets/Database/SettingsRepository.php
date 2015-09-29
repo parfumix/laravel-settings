@@ -13,9 +13,13 @@ class SettingsRepository {
     /**
      * Get all settings .
      *
+     * @param null $group
      * @return mixed
      */
-    public function all() {
+    public function all($group = null) {
+        if(! is_null($group))
+            return $this->model->where('group', $group)->lists('value', 'key');
+
         return $this->model->lists('value', 'key');
     }
 
@@ -23,11 +27,17 @@ class SettingsRepository {
      * Get by key .
      *
      * @param $key
+     * @param null $group
      * @return mixed
      */
-    public function getByKey($key) {
-        return $this->model
+    public function getByKey($key, $group = null) {
+        $query =  $this->model
             ->where('key', $key);
+
+        if(! is_null($group))
+            $query->where('group', $group);
+
+        return $query->get();
     }
 
     /**
@@ -46,11 +56,17 @@ class SettingsRepository {
      * Delete setting by key .
      *
      * @param $key
+     * @param null $group
      * @return $this
      */
-    public function deleteByKey($key) {
-        $setting = $this->model
-            ->where('key', $key)
+    public function deleteByKey($key, $group = null) {
+        $query = $this->model
+            ->where('key', $key);
+
+        if(! is_null($group))
+            $query->where('group', $group);
+
+        $setting = $query
             ->first();
 
         if( isset($setting->id) )

@@ -28,9 +28,10 @@ class Database extends Driver implements DriverAble {
     /**
      * Retrieve all options/values.
      *
+     * @param null $group
      * @return array
      */
-    public function all() {
+    public function all($group = null) {
         return $this->repository
             ->all()
             ->toArray();
@@ -39,13 +40,14 @@ class Database extends Driver implements DriverAble {
     /**
      * Retrieve option .
      *
-     * @param $key
+     * @param string $key
+     * @param null $group
      * @param null $default
      * @return mixed
      */
-    public function get($key, $default = null) {
+    public function get($key, $group = null, $default = null) {
         $settings = $this->repository
-            ->getByKey($key);
+            ->getByKey($key, $group);
 
         return isset($settings) ? $settings->value : $default;
     }
@@ -88,11 +90,12 @@ class Database extends Driver implements DriverAble {
      * delete option.
      *
      * @param $key
+     * @param null $group
      * @return bool|void
      */
-    public function delete($key) {
+    public function delete($key, $group = null) {
         $this->repository
-            ->deleteByKey($key);
+            ->deleteByKey($key, $group);
 
         return true;
     }

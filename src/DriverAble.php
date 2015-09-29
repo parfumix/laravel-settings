@@ -8,39 +8,46 @@ interface DriverAble {
     /**
      * Retrieve all options/values.
      *
+     * @param null $group
      * @return array
      */
-    public function all();
+    public function all($group = null);
 
     /**
      * Retrieve option .
      *
      * @param $key
+     * @param null $group
      * @param null $default
      * @return mixed
      */
-    public function get($key, $default = null);
+    public function get($key, $group = null, $default = null);
 
     /**
      * update option value.
      *
-     * @return void
+     * @param $key
+     * @param $value
+     * @param null $group
      */
-    public function update($key, $value);
+    public function update($key, $value, $group = null);
 
     /**
      * Insert a new option and set value.
      *
-     * @return void
+     * @param $key
+     * @param $value
+     * @param null $group
      */
-    public function insert($key, $value);
+    public function insert($key, $value, $group = null);
 
     /**
      * delete option.
      *
-     * @return void
+     * @param $key
+     * @param null $group
      */
-    public function delete($key);
+    public function delete($key, $group = null);
 
     /**
      * delete all options entries from .
