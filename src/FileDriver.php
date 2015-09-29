@@ -4,19 +4,6 @@ namespace Laravel\Settings;
 
 use Flysap\Support;
 
-/**
- * Class FileDriver
- * @package Laravel\Settings
- *
- * we need to determine business logic for each of C.R.U.D operations
- *
- * 1. ->all will return all the settings loaded, if is passed $group param than it have return all settings from current group .
- * 2. ->get will return settings by key, if is passed $group as param than we have to send the settings from current group
- * 3. ->update setting by key. if there is no key than insert one, if is passed group than we have to update from current group
- * 4. ->insert will insert new key, if passed group than save for current group .
- * 5. ->delete will delete setting by key, if there is passed group than delete from current group .
- */
-
 abstract class FileDriver extends Driver {
 
     /**
