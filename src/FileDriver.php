@@ -52,11 +52,11 @@ abstract class FileDriver extends Driver {
      * @param null $group
      * @return array
      */
-    public function all($group = null) {
-        if(! is_null($group))
-            return isset($this->settings[$group]) ? $this->settings[$group] : [];
+    public function all($group = self::DEFAULT_GROUP) {
+        if( $group == self::DEFAULT_GROUP )
+            return $this->settings;
 
-        return $this->settings;
+        return isset($this->settings[$group]) ? $this->settings[$group] : [];
     }
 
     /**
@@ -67,11 +67,8 @@ abstract class FileDriver extends Driver {
      * @param null $default
      * @return mixed
      */
-    public function get($key, $group = null, $default = null) {
-        if(! is_null($group))
-            return isset($this->settings[$group][$key]) ? $this->settings[$group][$key] : $default;
-
-        return isset($this->settings[$key]) ? $this->settings[$key] : $default;
+    public function get($key, $group = self::DEFAULT_GROUP, $default = null) {
+        return isset($this->settings[$group][$key]) ? $this->settings[$group][$key] : $default;
     }
 
     /**
@@ -79,14 +76,11 @@ abstract class FileDriver extends Driver {
      *
      * @param $key
      * @param $value
-     * @param null $group
+     * @param $group
      * @return $this|void
      */
-    public function update($key, $value, $group = null) {
-        if(! is_null($group))
-            $this->settings[$group][$key] = $value;
-        else
-            $this->settings[$key] = $value;
+    public function update($key, $value, $group = self::DEFAULT_GROUP) {
+        $this->settings[$group][$key] = $value;
 
         return $this;
     }
@@ -99,7 +93,7 @@ abstract class FileDriver extends Driver {
      * @param null $group
      * @return $this|Json|void
      */
-    public function insert($key, $value, $group = null) {
+    public function insert($key, $value, $group = self::DEFAULT_GROUP) {
         return $this->update($key, $value, $group);
     }
 
@@ -110,14 +104,9 @@ abstract class FileDriver extends Driver {
      * @param null $group
      * @return $this|void
      */
-    public function delete($key, $group = null) {
-        if(! is_null($group)) {
-            if( isset($this->settings[$group]) )
-                unset($this->settings[$group]);
-        } else {
-            if( isset($this->settings[$key]) )
-                unset($this->settings[$key]);
-        }
+    public function delete($key, $group = self::DEFAULT_GROUP) {
+        if( isset($this->settings[$group][$key]) )
+            unset($this->settings[$group][$key]);
 
         return $this;
     }

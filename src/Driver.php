@@ -8,6 +8,8 @@ abstract class Driver {
 
     use AttributesTrait;
 
+    const DEFAULT_GROUP = 'general';
+
     public function __construct(array $options = array()) {
         $this->setAttributes($options);
 

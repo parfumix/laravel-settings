@@ -28,12 +28,12 @@ class Database extends Driver implements DriverAble {
     /**
      * Retrieve all options/values.
      *
-     * @param null $group
+     * @param $group
      * @return array
      */
-    public function all($group = null) {
+    public function all($group = self::DEFAULT_GROUP) {
         return $this->repository
-            ->all()
+            ->all($group)
             ->toArray();
     }
 
@@ -41,11 +41,11 @@ class Database extends Driver implements DriverAble {
      * Retrieve option .
      *
      * @param string $key
-     * @param null $group
+     * @param $group
      * @param null $default
      * @return mixed
      */
-    public function get($key, $group = null, $default = null) {
+    public function get($key, $group = self::DEFAULT_GROUP, $default = null) {
         $settings = $this->repository
             ->getByKey($key, $group);
 
@@ -57,10 +57,10 @@ class Database extends Driver implements DriverAble {
      *
      * @param $key
      * @param $value
-     * @param null $group
+     * @param $group
      * @return bool|void
      */
-    public function update($key, $value, $group = null) {
+    public function update($key, $value, $group = self::DEFAULT_GROUP) {
         $this->repository->updateOrCreate($key, [
             'value' => $value,
             'group' => $group
@@ -74,10 +74,10 @@ class Database extends Driver implements DriverAble {
      *
      * @param $key
      * @param $value
-     * @param null $group
+     * @param $group
      * @return bool|void
      */
-    public function insert($key, $value, $group = null) {
+    public function insert($key, $value, $group = self::DEFAULT_GROUP) {
         $this->repository->updateOrCreate($key, [
             'value' => $value,
             'group' => $group
@@ -90,10 +90,10 @@ class Database extends Driver implements DriverAble {
      * delete option.
      *
      * @param $key
-     * @param null $group
+     * @param $group
      * @return bool|void
      */
-    public function delete($key, $group = null) {
+    public function delete($key, $group = self::DEFAULT_GROUP) {
         $this->repository
             ->deleteByKey($key, $group);
 
