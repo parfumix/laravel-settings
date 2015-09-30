@@ -114,10 +114,14 @@ abstract class FileDriver extends Driver {
     /**
      * delete all options entries from .
      *
+     * @param null $group
      * @return array
      */
-    public function clear() {
-        $this->settings = [];
+    public function clear($group = null) {
+        if( isset($group) )
+            unset($this->settings[$group]);
+        else
+            $this->settings = [];
 
         return $this;
     }
