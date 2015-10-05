@@ -49,7 +49,7 @@ abstract class FileDriver extends Driver {
     /**
      * Retrieve all options/values.
      *
-     * @param null $group
+     * @param null|string $group
      * @return array
      */
     public function all($group = self::DEFAULT_GROUP) {
@@ -63,7 +63,7 @@ abstract class FileDriver extends Driver {
      * Retrieve option .
      *
      * @param string $key
-     * @param null $group
+     * @param mixed|null|string $group
      * @param null $default
      * @return mixed
      */
@@ -90,7 +90,7 @@ abstract class FileDriver extends Driver {
      *
      * @param $key
      * @param $value
-     * @param null $group
+     * @param null|string $group
      * @return $this|Json|void
      */
     public function insert($key, $value, $group = self::DEFAULT_GROUP) {
@@ -101,7 +101,7 @@ abstract class FileDriver extends Driver {
      * delete option.
      *
      * @param $key
-     * @param null $group
+     * @param null|string $group
      * @return $this|void
      */
     public function delete($key, $group = self::DEFAULT_GROUP) {
