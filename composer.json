@@ -27,7 +27,7 @@
     "psr-4": {
       "Laravel\\Settings\\": "src/"
     },
-    "autoload": ["helpers.php"]
+    "files": ["helpers.php"]
   },
   "minimum-stability": "dev"
 }
